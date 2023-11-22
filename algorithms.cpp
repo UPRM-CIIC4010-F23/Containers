@@ -22,11 +22,23 @@ public:
     string getLastName() const { return lastName; }
     float getGpa() const { return gpa; }
 
+    void setGpa(float v){gpa = v;}
+
 
     // operator< required by sort without parameters
-    
+    bool operator< (const Student &s) const {
+        return this->getId() < s.getId() ;
+    }
+    //  s1 < s2
 };
 
+bool compByGPAIncreasing(const Student &s1, const Student &s2){
+    return s1.getGpa() < s2.getGpa() ; 
+}
+
+bool compByGPADecreasing(const Student &s1, const Student &s2){
+    return s1.getGpa() > s2.getGpa() ; 
+}
 
 
 int main() {
@@ -49,35 +61,53 @@ int main() {
 
     cout << "Count of Vector Students: " << testStudents.size() << endl;
 
-    // Sort students by id using operator<
-
+    // // Sort students by id using operator<
+    // sort(testStudents.begin(),testStudents.end()); 
    
-    // Sort increasingly by GPA using standalone comparator function
-
+    // // Sort increasingly by GPA using standalone comparator function
+    // sort(testStudents.begin(),testStudents.end(), compByGPAIncreasing); 
     
-    // Sort decreasingly by GPA using standalone comparator function
-
+    // // Sort decreasingly by GPA using standalone comparator function
+    // sort(testStudents.begin(),testStudents.end(), compByGPADecreasing); 
     
     // Sort increasingly by GPA using lambda expression
-
+    // sort(testStudents.begin(),testStudents.end(), 
+    // [](const Student &s1, const Student &s2) {return s1.getGpa() < s2.getGpa() ; }); 
 
     // Sort increasingly by lastname using lambda expression
-
+    // sort(testStudents.begin(),testStudents.end(), 
+    // [](const Student &s1, const Student &s2) {return s1.getLastName() < s2.getLastName() ; }); 
 
     // Find Student with last name "García"
+    auto it = find_if(testStudents.begin(),testStudents.end(), 
+    [](const Student &s){return s.getLastName() == "García"; }) ; 
 
+    cout << "First ID: " << it ->getId() <<endl; 
 
     // Find second Student with last name "García"
+    auto it2 = find_if(it+1,testStudents.end(), 
+    [](const Student &s){return s.getLastName() == "García"; }) ; 
 
+    cout << "Second ID: " << it2 ->getId() <<endl; 
     
     // Find third Student with last name "García"
+    auto it3 = find_if(it2+1,testStudents.end(), 
+    [](const Student &s){return s.getLastName() == "García"; }) ; 
 
+    cout << "Third ID: " << it3 ->getId() <<endl; 
+
+    cout << boolalpha << (it3 == testStudents.end()) <<endl ;
 
     // Count how many students have GPA >= 3.5
+    int total = count_if(testStudents.begin(),testStudents.end(), 
+    [](const Student &s) {return s.getGpa() >= 3.5 ; });
+
+    cout << total << " students with 3.5 GPA or higher." << endl ; 
 
 
     // Round every GPA using for_each
-
+    for_each(testStudents.begin(),testStudents.end(), 
+    [](Student &s) {  s.setGpa( round(s.getGpa()) ); });
     
     cout << "The End" << endl;
 }
