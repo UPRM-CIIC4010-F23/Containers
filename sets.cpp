@@ -25,6 +25,11 @@ class Student {
 int countUnique(const vector<Student> &students)
 {
     // CODE HERE
+    set<Student> uniqueStudents; 
+    for (Student s: students){
+        uniqueStudents.insert(s);
+    }
+    return uniqueStudents.size() ; 
 }
 
 int main() {

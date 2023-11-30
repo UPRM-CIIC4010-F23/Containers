@@ -16,6 +16,19 @@ int main() {
 
     // CODE HERE
 
+    map<char, int> alphabetHistogram ; 
+
+    for (char l : alphabet){
+        alphabetHistogram [l] = 0 ;
+    }
+
+    for (char l : paragraph){
+        alphabetHistogram [toupper(l)]++ ;
+    }
+
+    for (char l : alphabet){
+        cout << "Letter " << l << " appears: " << alphabetHistogram [l]  << endl;
+    }
 
     return 0;
     

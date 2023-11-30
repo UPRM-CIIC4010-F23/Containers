@@ -18,7 +18,7 @@ class Student {
     string getLastName() const { return lastName; }
     Student(int id, string fn, string ln): id(id), firstName(fn), lastName(ln) {}
 
-    bool operator< (const Student &s) const { return this->getId() < s.getId(); }
+    bool operator< (const Student &s) const { return this->getLastName() < s.getLastName(); }
 
 };
 
@@ -42,6 +42,11 @@ int main() {
     
     // CODE HERE
 
+    while( ! numbers.empty()) {
+        cout << numbers.front() << endl ;
+        numbers.pop() ;
+    }
+
 
     priority_queue<int> numbers2;
 
@@ -59,7 +64,10 @@ int main() {
     numbers2.push(71);
     
     // CODE HERE
-
+    while( ! numbers2.empty()) {
+        cout << numbers2.top() << endl ;
+        numbers2.pop() ;
+    }
 
 
 
@@ -78,6 +86,10 @@ int main() {
     testStudents.push(Student(71, "Jose", "Ortiz"));
 
     // CODE HERE
+    while( ! testStudents.empty()) {
+        cout << testStudents.top().getLastName() << endl ;
+        testStudents.pop() ;
+    }
 
    
 
